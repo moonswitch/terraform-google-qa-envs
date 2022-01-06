@@ -2,7 +2,7 @@ resource "random_pet" "qa-env" {
   for_each = toset(var.qa_environments)
 
   keepers = {
-    doc_id = each.key
+    qa_env = each.key
   }
 }
 
@@ -12,9 +12,9 @@ resource "google_firestore_document" "qa-env" {
   project     = var.project
   database    = var.database
   collection  = var.collection
-  document_id = each.value.keepers.doc_id
+  document_id = each.value.id
   fields = jsonencode({
-    url    = "${each.key}.${var.base_domain}"
+    url    = "${each.value.keepers.qa_env}.${var.base_domain}"
     in_use = false
     pr     = null
   })
