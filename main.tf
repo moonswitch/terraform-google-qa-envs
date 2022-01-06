@@ -18,4 +18,8 @@ resource "google_firestore_document" "qa-env" {
     in_use = { booleanValue = false }
     pr     = { stringValue = "" }
   })
+
+  lifecycle {
+    ignore_changes = [fields]
+  }
 }
