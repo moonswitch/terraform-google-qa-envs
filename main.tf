@@ -14,8 +14,8 @@ resource "google_firestore_document" "qa-env" {
   collection  = var.collection
   document_id = each.value.id
   fields = jsonencode({
-    url    = "${each.value.keepers.qa_env}.${var.base_domain}"
-    in_use = false
-    pr     = null
+    url    = { stringValue = "${each.value.keepers.qa_env}.${var.base_domain}" }
+    in_use = { booleanValue = false }
+    pr     = { stringValue = "" }
   })
 }
