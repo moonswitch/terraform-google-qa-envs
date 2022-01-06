@@ -16,6 +16,6 @@ resource "google_firestore_document" "qa-env" {
   fields = jsonencode({
     url    = "${each.key}.${var.base_domain}"
     in_use = false
-    pr     = nil
+    pr     = null
   })
 }
